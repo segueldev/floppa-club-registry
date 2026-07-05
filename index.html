@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Felino Floppa - Registro de Socios</title>
+  <link rel="icon" type="image/png" href="assets/logo%201.png">
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- DataTables + Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
+  <!-- Estilos propios (Visual mockup design) -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="index-page">
+
+  <!-- ===== NAVEGACIÓN (Sticky Liquid Glass) ===== -->
+  <header class="header-sticky">
+    <nav class="glass-dark navbar-floppa">
+      <a class="navbar-brand-floppa" href="index.html">
+        <img src="assets/logo 1.png" alt="Logo del club felino Floppa">
+        <span>Club Felino Floppa</span>
+      </a>
+      <ul class="navbar-nav-floppa">
+        <li>
+          <a class="glass-brown" href="index.html">Inicio</a>
+        </li>
+        <li>
+          <a class="glass-nav-item" href="formulario.html">Nuevo Socio</a>
+        </li>
+        <li style="display: flex; align-items: center; gap: 0.5rem; margin-left: 0.5rem;">
+          <button id="btnMusic" class="glass-nav-item" style="border: 1px solid transparent; background: transparent; padding: 0.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; height: 38px; width: 38px;">
+            <span id="musicIcon">🔇</span>
+          </button>
+          <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.40" class="volume-slider" title="Ajustar volumen">
+        </li>
+        <li>
+          <a class="glass-nav-item" href="https://github.com/segueldev" target="_blank" rel="noopener" style="padding: 0.5rem; display: flex; align-items: center; justify-content: center; height: 38px; width: 38px; margin-left: 0.25rem;" title="Perfil de GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Audio Loop de música de fondo (volumen controlado por JS, silenciado por defecto) -->
+  <audio id="bgMusic" src="assets/musica.mp3" loop></audio>
+  <audio id="mewSound" src="assets/mew.mp3" preload="auto"></audio>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main class="animate-page-in container py-4" style="max-width: 64rem;">
+
+    <!-- Banner Header con Caracal logo, ficha del caracal y nota del desarrollador -->
+    <div class="banner-floppa">
+      <div class="banner-content">
+        <img src="assets/logo 2.png" alt="Foto de Floppa, un caracal" class="banner-logo">
+        <div class="banner-info" style="flex: 1;">
+          <h1>Registro de Socios</h1>
+          <p>10 caracales forman parte de la manada Floppa.</p>
+          
+          <!-- Explicación funcional de la App -->
+          <p class="floppa-explanation" style="font-weight: 500; opacity: 0.95; margin-top: 0.75rem;">
+            Esta aplicación es un sistema de registro de socios: la tabla muestra datos obtenidos en tiempo real desde una API externa (JSONPlaceholder), y el botón 'Nuevo Socio' lleva a un formulario donde se simula el ingreso de un nuevo registro con validaciones en JavaScript.
+          </p>
+          
+          <!-- Ficha Informativa / Dato curioso -->
+          <div class="floppa-fact-box">
+            <img src="assets/info-icono.png" alt="Info" class="fact-icon-img">
+            <p class="fact-text">
+              El "gato Floppa" no es una raza doméstica sino un caracal (<i>Caracal caracal</i>), felino salvaje de África y Asia, famoso en internet por su forma cuadrada y orejas con mechones negros.
+            </p>
+          </div>
+
+          <!-- elegí el tema de floppa porque es de los memes de gatos que más me gustan en internet, es mi segundo favorito después de los gatos esfinge (ya había hecho un trabajo con esfinges antes así que quise variar para no repetir la misma cuestión), aunque técnicamente ni es un gato doméstico, es un caracal, pero eso mismo me pareció gracioso para el club -->
+          <!-- Nota del desarrollador -->
+          <div class="developer-note-box">
+            <span class="dev-note-tag">Nota del desarrollador</span>
+            <p class="dev-note-text">
+              Elegí el tema de Floppa para este proyecto porque es uno de los memes felinos más conocidos de internet: un caracal (Caracal caracal), felino salvaje de África y Asia, que por su forma cuadrada y su postura relajada parece un gato doméstico gigante. Me pareció una forma entretenida de darle identidad a la webapp sin perder la seriedad del formulario y la tabla de datos.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="banner-btn-container">
+        <a href="formulario.html" class="btn-imagen-link">
+          <img src="assets/boton-nuevo-socio.png" alt="Nuevo Socio" class="btn-imagen-nuevo-socio">
+        </a>
+      </div>
+    </div>
+
+    <!-- Contenedor de la Tabla -->
+    <div class="card-container">
+      <div class="table-responsive-wrapper">
+        <table id="tablaSocios" class="table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Usuario</th>
+              <th>Email</th>
+              <th>Sitio Web</th>
+              <th>Ciudad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Los datos se cargan dinámicamente con JQuery DataTables -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== PIE DE PÁGINA (Solid bar at the bottom) ===== -->
+  <footer class="site-footer">
+    <p class="site-footer-text">
+      Benjamín Seguel <span class="site-footer-sep">—</span> Ingeniería en Ciberseguridad <span class="site-footer-sep">—</span> Programación Front End <span class="site-footer-sep">—</span> Evaluación 03 <span class="site-footer-sep">—</span> Prof. Erick Bailey Rebolledo <span class="site-footer-sep">—</span> INACAP Temuco IEC <span class="site-footer-sep">—</span> 2026
+    </p>
+  </footer>
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+  <!-- Script propio -->
+  <script src="js/tabla.js"></script>
+
+  <!-- Control de música de fondo y efectos interactivos (burbujas y clics) -->
+  <script>
+    $(document).ready(function() {
+      // 1. Controlador de la Música de Fondo, Volumen y Pre-carga de Maullido
+      const audio = document.getElementById('bgMusic');
+      const btnMusic = document.getElementById('btnMusic');
+      const musicIcon = document.getElementById('musicIcon');
+      const musicVolume = document.getElementById('musicVolume');
+      const mewAudio = document.getElementById('mewSound');
+
+      if (mewAudio) {
+        mewAudio.load(); // Forzar pre-carga
+      }
+
+      if (audio && btnMusic && musicIcon && musicVolume) {
+        // Cargar volumen guardado o por defecto a 0.40 (40%)
+        let savedVolume = localStorage.getItem('musicVolume');
+        let currentVolume = savedVolume !== null ? parseFloat(savedVolume) : 0.40;
+        
+        audio.volume = currentVolume;
+        musicVolume.value = currentVolume;
+
+        // Comprobar si estaba reproduciéndose anteriormente (por defecto false para el primer ingreso)
+        const storedPlaying = localStorage.getItem('musicPlaying');
+        const shouldPlay = (storedPlaying === 'true') && currentVolume > 0;
+
+        if (shouldPlay) {
+          audio.play().then(() => {
+            musicIcon.textContent = '🔊';
+          }).catch(err => {
+            console.log("Autoplay bloqueado al navegar:", err);
+            audio.pause();
+            musicIcon.textContent = '🔇';
+            localStorage.setItem('musicPlaying', 'false');
+          });
+        } else {
+          audio.pause();
+          musicIcon.textContent = '🔇';
+        }
+
+        // Alternar reproducción con el botón altavoz
+        btnMusic.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (audio.paused) {
+            if (audio.volume === 0) {
+              audio.volume = 0.40;
+              musicVolume.value = 0.40;
+              localStorage.setItem('musicVolume', 0.40);
+            }
+            audio.play().then(() => {
+              musicIcon.textContent = '🔊';
+              localStorage.setItem('musicPlaying', 'true');
+            }).catch(err => {
+              console.error("Error al reproducir audio:", err);
+            });
+          } else {
+            audio.pause();
+            musicIcon.textContent = '🔇';
+            localStorage.setItem('musicPlaying', 'false');
+          }
+        });
+
+        // Controlador del slider de volumen en tiempo real
+        musicVolume.addEventListener('input', function() {
+          const newVol = parseFloat(this.value);
+          audio.volume = newVol;
+          localStorage.setItem('musicVolume', newVol);
+
+          if (newVol === 0) {
+            audio.pause();
+            musicIcon.textContent = '🔇';
+            localStorage.setItem('musicPlaying', 'false');
+          } else {
+            if (audio.paused && localStorage.getItem('musicPlaying') === 'true') {
+              audio.play().then(() => {
+                musicIcon.textContent = '🔊';
+              }).catch(err => console.log(err));
+            } else if (!audio.paused) {
+              musicIcon.textContent = '🔊';
+            }
+          }
+        });
+      }
+
+      // 2. Efecto de Burbujas en Hover (Navbar links) y clics
+      $('.navbar-nav-floppa a').on('mouseenter', function() {
+        const $link = $(this);
+        const $parent = $link.parent(); // Elemento <li> para evitar recortar desbordes
+
+        // Reproducir sonido hover aleatorio (burbuja.mp3 o gota.mp3)
+        const hoverSound = new Audio(Math.random() > 0.5 ? 'assets/burbuja.mp3' : 'assets/gota.mp3');
+        hoverSound.volume = 0.12;
+        hoverSound.play().catch(e => console.log('Audio bloqueado en hover:', e));
+
+        // Generar dinámicamente entre 4 y 6 burbujas
+        const numBubbles = Math.floor(Math.random() * 3) + 4; // 4, 5 o 6
+        for (let i = 0; i < numBubbles; i++) {
+          const $bubble = $('<span class="burbuja"></span>');
+          const size = Math.random() * 6 + 6; // Entre 6px y 12px
+          const x = Math.random() * $link.outerWidth();
+          const delay = Math.random() * 0.3; // Retraso escalonado
+
+          $bubble.css({
+            width: size + 'px',
+            height: size + 'px',
+            left: x + 'px',
+            bottom: '0px',
+            animationDelay: delay + 's'
+          });
+
+          $parent.append($bubble);
+
+          // Eliminar burbuja al finalizar su animación
+          setTimeout(function() {
+            $bubble.remove();
+          }, 1100); // 800ms animación + retraso + margen
+        }
+      });
+
+      $('.navbar-nav-floppa a').on('click', function(e) {
+        const href = $(this).attr('href');
+        const target = $(this).attr('target');
+        
+        if (href && href !== '#') {
+          e.preventDefault();
+          
+          // Reproducir clickvidrio.mp3
+          const clickSound = new Audio('assets/clickvidrio.mp3');
+          clickSound.volume = 0.25;
+          clickSound.play().catch(e => console.log('Audio bloqueado en clic:', e));
+
+          // Pequeño retardo para oír el sonido antes de navegar
+          setTimeout(function() {
+            if (target === '_blank') {
+              window.open(href, '_blank', 'noopener,noreferrer');
+            } else {
+              window.location.href = href;
+            }
+          }, 150);
+        }
+      });
+
+      // Banner image button click sound (mew.mp3 pre-cargado)
+      $('.btn-imagen-link').on('click', function(e) {
+        const href = $(this).attr('href');
+        if (href) {
+          e.preventDefault();
+          
+          if (mewAudio) {
+            mewAudio.currentTime = 0;
+            mewAudio.volume = 0.35;
+            mewAudio.play().catch(e => console.log('Audio bloqueado en clic banner:', e));
+          }
+
+          // Retardo de 400ms para oír el maullido completo antes de navegar
+          setTimeout(function() {
+            window.location.href = href;
+          }, 400);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
