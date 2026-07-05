@@ -33,7 +33,7 @@ py -m http.server 8000
 python3 -m http.server 8000
 ```
 
-Luego abrir en el navegador: `http://localhost:8000/index.html`
+Luego abrir en el navegador: `http://localhost:8000`
 
 ### Opción 2: Extensión Live Server (más simple, no requiere terminal)
 
